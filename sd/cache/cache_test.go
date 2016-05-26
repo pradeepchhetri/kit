@@ -54,7 +54,7 @@ func TestCache(t *testing.T) {
 		t.Errorf("endpoint a closed, not good")
 	case <-cb:
 		t.Logf("endpoint b closed, good")
-	case <-time.After(100 * time.Millisecond):
+	case <-time.After(time.Second):
 		t.Errorf("didn't close the deleted instance in time")
 	}
 	if want, have := 1, len(cache.Endpoints()); want != have {
@@ -67,7 +67,7 @@ func TestCache(t *testing.T) {
 	// case <-cb: will succeed, as it's closed
 	case <-ca:
 		t.Logf("endpoint a closed, good")
-	case <-time.After(100 * time.Millisecond):
+	case <-time.After(time.Second):
 		t.Errorf("didn't close the deleted instance in time")
 	}
 	if want, have := 0, len(cache.Endpoints()); want != have {
